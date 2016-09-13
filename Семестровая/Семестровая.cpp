@@ -10,8 +10,9 @@ using namespace std;
 double* methodGaussa(int n, double **matrix);
 void output(int n, double *matrix);
 void input(int & n, double** & matrix);
-bool CheckGaussMatrix(int n, double** & matrix);
+bool checkGaussMatrix(int n, double** & matrix);
 void createInterface();
+void output2(int n, double **matrix);
 
 int main()
 {
@@ -32,7 +33,7 @@ int main()
 			switch (choose)
 			{
 			case 1:
-				if (CheckGaussMatrix(n, matrix))
+				if (checkGaussMatrix(n, matrix))
 				{
 					x = methodGaussa(n, matrix);
 					output(n, x);
@@ -40,7 +41,7 @@ int main()
 				else { system("cls"); cout << "Данная матрица не может быть решена методом Гаусса!" << '\n';  }
 				break;
 			case 2:
-
+				system("cls");
 				break;
 			case 3:
 				input(n, matrix);
@@ -104,13 +105,13 @@ void input(int & n, double** & matrix)
 	} while (notNumer);
 	matrix = new double*[n];
 	for (int i = 0; i < n; i++) {
-		matrix[i] = new double[n + 1];
+		matrix[i] = new double[n+1];
 		for (int j = 0; j < n; j++) {
-			cout << "a[" << i << "][" << j << "]= ";
+			cout << "a[" << i+1 << "][" << j+1 << "]= ";
 			cin >> matrix[i][j];
 		}
-		cout << "y[" << i << "]= ";
-		cin >> matrix[i][n + 1];
+		cout << "y[" << i+1 << "]= ";
+		cin >> matrix[i][n];
 	}
 	system("cls");
 }
@@ -123,19 +124,20 @@ void swap(double & a, double & b)
 	a = temp;
 }
 
-bool CheckGaussMatrix(int n, double** & matrix)
+bool checkGaussMatrix(int n, double** & matrix)
 {
-	int null = 0;
 	bool flag = false;
+	// Опускаем столбцы содержащие ноль вниз матрицы
 	for (int j = 0; j < n; j++)
 	{
 		if (matrix[j][j] == 0)
 		{
+			// Меняем местами строку содержащую ноль в столбце j и строку ненулевого столбца j
 			for (int i = j + 1; i < n;i++)
-			{
-				if (matrix[i][j] != 0)
+			{				
+				if (matrix[i][j] != 0) 
 				{
-					for (int h = 0; h <= n;h++)
+					for (int h = 0; h <= n;h++) 
 					{
 						swap(matrix[j][h], matrix[i][h]);
 					}
@@ -146,7 +148,7 @@ bool CheckGaussMatrix(int n, double** & matrix)
 			flag = false;
 		}
 	}
-	int mul = 2;
+	// Проверяем матрицу на повтор строк
 	bool repetition = true;
 	for (int i = 0; i < n;i++)
 	{
@@ -169,36 +171,36 @@ double* methodGaussa(int n, double **matrix)
 {
 	double* x = new double[n];
 	int colTemp = 0;
-	double numberTemp = 0;
+	double numberDgnl = 0;
 	for (int i = 0;i<n;i++)
 	{
-		numberTemp = matrix[i][colTemp];
-		for (int j = colTemp; j < n; j++)
+		numberDgnl = matrix[i][colTemp]; //Число по диагонали i-ой строки
+		//Делим i-ую строку на numberDgnl
+		for (int j = colTemp; j <= n; j++) 
 		{
-			matrix[i][j] = matrix[i][j] / numberTemp;
+			matrix[i][j] = matrix[i][j] / numberDgnl; 
 		}
-		matrix[i][n + 1] = matrix[i][n + 1] / numberTemp;
+		//Подводим к нулю числа остальных строк в стобце числа по диагонали i-ой строки
 		for (int j = i + 1; j < n; j++)
 		{
-			numberTemp = matrix[j][colTemp];
-			for (int h = colTemp; h < n; h++)
+			numberDgnl = matrix[j][colTemp]; //Число j-ой строки в столбце числа по диагонали i-ой строки
+			for (int h = colTemp; h <= n; h++) 
 			{
-				matrix[j][h] = matrix[j][h] - numberTemp * matrix[colTemp][h];
+				matrix[j][h] = matrix[j][h] - numberDgnl * matrix[colTemp][h];
 			}
-			matrix[j][n + 1] = matrix[j][n + 1] - numberTemp * matrix[colTemp][n + 1];
 		}
-		colTemp += 1;
+		colTemp++;
 	}
-	for (int i = n - 2; i >= 0; i--)
+	for (int i = n - 2; i >= 0; i--) //обратный ход метода(нахождение x)
 	{
 		for (int j = 1; j <= n - 1 - i;j++)
 		{
-			matrix[i][n + 1] = matrix[i][n + 1] - matrix[i][i + j] * matrix[i+j][n + 1];
+			matrix[i][n] = matrix[i][n] - matrix[i][i + j] * matrix[i+j][n];
 		}
 	}
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++) //Заносим x-сы в отдельный массив
 	{
-		x[i] = matrix[i][n + 1];
+		x[i] = matrix[i][n];
 	}
 	return x;
 }
@@ -214,3 +216,15 @@ void output(int n, double *matrix)
 	}
 }
 
+void output2(int n, double **matrix)
+{
+	system("cls");
+	cout << "Ответ:" << '\n';
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j <= n; j++)
+		{
+			cout << "a" << i + j << " = " << matrix[i][j] << '\n';
+		}
+	}
+}
