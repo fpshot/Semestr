@@ -10,6 +10,7 @@ using namespace std;
 double* methodGaussa(int n, double **matrix);
 void output(int n, double *matrix);
 void input(int & n, double** & matrix);
+bool CheckGaussMatrix(int n, double** & matrix);
 
 int main()
 {
@@ -19,10 +20,14 @@ int main()
 	double **matrix, *x;
 	int n;
 	input(n, matrix);
-	x = methodGaussa(n, matrix);
-	output(n, x);
+	if (CheckGaussMatrix(n, matrix))
+	{
+		x = methodGaussa(n, matrix);
+		output(n, x);
+		delete[] x;
+	}
+	else { cout << "Данная матрица не может быть решена методом Гаусса!"; }
 	delete[] matrix;
-	delete[] x;
 	cin.get(); cin.get();
     return 0;
 }
@@ -62,6 +67,39 @@ void input(int & n, double** & matrix)
 		cout << "y[" << i << "]= ";
 		cin >> matrix[i][n + 1];
 	}
+}
+
+void swap(double & a, double & b)
+{
+	a = a + b;
+	b = a - b;
+	a = a - b;
+}
+
+bool CheckGaussMatrix(int n, double** & matrix)
+{
+	int null = 0;
+	bool flag = false;
+	for (int j = 0; j < n; j++)
+	{
+		if (matrix[j][j] == 0)
+		{
+			for (int i = j + 1; i < n;i++)
+			{
+				if (matrix[i][j] != 0)
+				{
+					for (int h = 0; h <= n;h++)
+					{
+						swap(matrix[j][h], matrix[i][h]);
+					}
+					flag = true;
+				}
+			}
+			if (!flag) { return false; }
+			flag = false;
+		}
+	}
+	return true;
 }
 
 double* methodGaussa(int n, double **matrix)
