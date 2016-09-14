@@ -38,7 +38,8 @@ int main()
 				if (checkMatrix(n, matrix))
 				{
 					x = methodGaussa(n, matrix);
-					output(n, x);
+					if (x != NULL) { output(n, x); }
+					else { system("cls"); cout << "Данная матрица не может быть решена методом Гаусса!" << '\n'; }
 				}				
 				else { system("cls"); cout << "Данная матрица не может быть решена методом Гаусса!" << '\n';  }
 				break;
@@ -208,10 +209,14 @@ double* methodGaussa(int n, double **matrix)
 	{
 		numberDgnl = tempMatrix[i][colTemp]; //Число по диагонали i-ой строки
 		//Делим i-ую строку на numberDgnl
-		for (int j = colTemp; j <= n; j++) 
+		if (numberDgnl != 0)
 		{
-			tempMatrix[i][j] = tempMatrix[i][j] / numberDgnl;
+			for (int j = colTemp; j <= n; j++)
+			{
+				tempMatrix[i][j] = tempMatrix[i][j] / numberDgnl;
+			}
 		}
+		else { cout << "Данная матрица не может быть решена методом Гаусса!" << '\n'; return NULL; }
 		//Подводим к нулю числа остальных строк в стобце числа по диагонали i-ой строки
 		for (int j = i + 1; j < n; j++)
 		{
