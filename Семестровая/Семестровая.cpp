@@ -1,4 +1,4 @@
-// Семестровая.cpp: определяет точку входа для консольного приложения.
+п»ї// РЎРµРјРµСЃС‚СЂРѕРІР°СЏ.cpp: РѕРїСЂРµРґРµР»СЏРµС‚ С‚РѕС‡РєСѓ РІС…РѕРґР° РґР»СЏ РєРѕРЅСЃРѕР»СЊРЅРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ.
 //
 
 #include "stdafx.h"
@@ -37,7 +37,7 @@ int main()
 					x = methodGaussa(n, matrix);
 					output(n, x);
 				}				
-				else { system("cls"); cout << "Данная матрица не может быть решена методом Гаусса!" << '\n';  }
+				else { system("cls"); cout << "Р”Р°РЅРЅР°СЏ РјР°С‚СЂРёС†Р° РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ СЂРµС€РµРЅР° РјРµС‚РѕРґРѕРј Р“Р°СѓСЃСЃР°!" << '\n';  }
 				break;
 			case 2:
 				system("cls");
@@ -52,13 +52,13 @@ int main()
 				break;
 			default:
 				system("cls");
-				cout << "Нет такого пункта в меню!" << '\n';
+				cout << "РќРµС‚ С‚Р°РєРѕРіРѕ РїСѓРЅРєС‚Р° РІ РјРµРЅСЋ!" << '\n';
 				break;
 			}
 		}
 		catch (ios_base::failure e) {
 			system("cls");
-			cout << "Введите число!" << '\n';
+			cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ!" << '\n';
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
@@ -70,12 +70,12 @@ int main()
 
 void createInterface()
 {
-	cout << "==========МЕНЮ==========" << '\n';
-	cout << "Выберите пункт меню:" << '\n';
-	cout << "1: Метод Гаусса" << '\n';
-	cout << "2: Метод Крамера" << '\n';
-	cout << "3: Ввести другую матрицу" << '\n';
-	cout << "4: Выход" << '\n';
+	cout << "==========РњР•РќР®==========" << '\n';
+	cout << "Р’С‹Р±РµСЂРёС‚Рµ РїСѓРЅРєС‚ РјРµРЅСЋ:" << '\n';
+	cout << "1: РњРµС‚РѕРґ Р“Р°СѓСЃСЃР°" << '\n';
+	cout << "2: РњРµС‚РѕРґ РљСЂР°РјРµСЂР°" << '\n';
+	cout << "3: Р’РІРµСЃС‚Рё РґСЂСѓРіСѓСЋ РјР°С‚СЂРёС†Сѓ" << '\n';
+	cout << "4: Р’С‹С…РѕРґ" << '\n';
 	cout << "========================" << '\n';
 }
 
@@ -83,7 +83,7 @@ void input(int & n, double** & matrix)
 {
 	system("cls");
 	bool notNumer = true;
-	cout << "Введите количество уравнений: ";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СѓСЂР°РІРЅРµРЅРёР№: ";
 	do
 	{	
 		try {	
@@ -91,13 +91,13 @@ void input(int & n, double** & matrix)
 			cin >> n;
 			if (n <= 0)
 			{
-				cout << "Введите натуральное число!: ";
+				cout << "Р’РІРµРґРёС‚Рµ РЅР°С‚СѓСЂР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ!: ";
 				notNumer = true;
 			}
 			else { notNumer = false; }
 		}
 		catch (ios_base::failure e) {
-			cout << "Введите число!: ";
+			cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ!: ";
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
@@ -126,12 +126,12 @@ void swap(double & a, double & b)
 bool checkGaussMatrix(int n, double** & matrix)
 {
 	bool flag = false;
-	// Опускаем столбцы содержащие ноль вниз матрицы
+	// РћРїСѓСЃРєР°РµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРґРµСЂР¶Р°С‰РёРµ РЅРѕР»СЊ РІРЅРёР· РјР°С‚СЂРёС†С‹
 	for (int j = 0; j < n; j++)
 	{
 		if (matrix[j][j] == 0)
 		{
-			// Меняем местами строку содержащую ноль в столбце j и строку ненулевого столбца j
+			// РњРµРЅСЏРµРј РјРµСЃС‚Р°РјРё СЃС‚СЂРѕРєСѓ СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РЅРѕР»СЊ РІ СЃС‚РѕР»Р±С†Рµ j Рё СЃС‚СЂРѕРєСѓ РЅРµРЅСѓР»РµРІРѕРіРѕ СЃС‚РѕР»Р±С†Р° j
 			for (int i = j + 1; i < n;i++)
 			{				
 				if (matrix[i][j] != 0) 
@@ -147,7 +147,7 @@ bool checkGaussMatrix(int n, double** & matrix)
 			flag = false;
 		}
 	}
-	// Проверяем матрицу на повтор строк
+	// РџСЂРѕРІРµСЂСЏРµРј РјР°С‚СЂРёС†Сѓ РЅР° РїРѕРІС‚РѕСЂ СЃС‚СЂРѕРє
 	bool repetition = true;
 	for (int i = 0; i < n;i++)
 	{
@@ -173,16 +173,16 @@ double* methodGaussa(int n, double **matrix)
 	double numberDgnl = 0;
 	for (int i = 0;i<n;i++)
 	{
-		numberDgnl = matrix[i][colTemp]; //Число по диагонали i-ой строки
-		//Делим i-ую строку на numberDgnl
+		numberDgnl = matrix[i][colTemp]; //Р§РёСЃР»Рѕ РїРѕ РґРёР°РіРѕРЅР°Р»Рё i-РѕР№ СЃС‚СЂРѕРєРё
+		//Р”РµР»РёРј i-СѓСЋ СЃС‚СЂРѕРєСѓ РЅР° numberDgnl
 		for (int j = colTemp; j <= n; j++) 
 		{
 			matrix[i][j] = matrix[i][j] / numberDgnl; 
 		}
-		//Подводим к нулю числа остальных строк в стобце числа по диагонали i-ой строки
+		//РџРѕРґРІРѕРґРёРј Рє РЅСѓР»СЋ С‡РёСЃР»Р° РѕСЃС‚Р°Р»СЊРЅС‹С… СЃС‚СЂРѕРє РІ СЃС‚РѕР±С†Рµ С‡РёСЃР»Р° РїРѕ РґРёР°РіРѕРЅР°Р»Рё i-РѕР№ СЃС‚СЂРѕРєРё
 		for (int j = i + 1; j < n; j++)
 		{
-			numberDgnl = matrix[j][colTemp]; //Число j-ой строки в столбце числа по диагонали i-ой строки
+			numberDgnl = matrix[j][colTemp]; //Р§РёСЃР»Рѕ j-РѕР№ СЃС‚СЂРѕРєРё РІ СЃС‚РѕР»Р±С†Рµ С‡РёСЃР»Р° РїРѕ РґРёР°РіРѕРЅР°Р»Рё i-РѕР№ СЃС‚СЂРѕРєРё
 			for (int h = colTemp; h <= n; h++) 
 			{
 				matrix[j][h] = matrix[j][h] - numberDgnl * matrix[colTemp][h];
@@ -190,14 +190,14 @@ double* methodGaussa(int n, double **matrix)
 		}
 		colTemp++;
 	}
-	for (int i = n - 2; i >= 0; i--) //обратный ход метода(нахождение x)
+	for (int i = n - 2; i >= 0; i--) //РѕР±СЂР°С‚РЅС‹Р№ С…РѕРґ РјРµС‚РѕРґР°(РЅР°С…РѕР¶РґРµРЅРёРµ x)
 	{
 		for (int j = 1; j <= n - 1 - i;j++)
 		{
 			matrix[i][n] = matrix[i][n] - matrix[i][i + j] * matrix[i+j][n];
 		}
 	}
-	for (int i = 0; i < n; i++) //Заносим x-сы в отдельный массив
+	for (int i = 0; i < n; i++) //Р—Р°РЅРѕСЃРёРј x-СЃС‹ РІ РѕС‚РґРµР»СЊРЅС‹Р№ РјР°СЃСЃРёРІ
 	{
 		x[i] = matrix[i][n];
 	}
@@ -208,7 +208,7 @@ double* methodGaussa(int n, double **matrix)
 void output(int n, double *matrix)
 {
 	system("cls");
-	cout << "Ответ:" << '\n';
+	cout << "РћС‚РІРµС‚:" << '\n';
 	for (int i = 0; i < n; i++)
 	{
 		cout << "x" << i + 1 << " = " << matrix[i] << '\n';
