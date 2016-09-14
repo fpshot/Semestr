@@ -12,7 +12,6 @@ void output(int n, double *matrix);
 void input(int & n, double** & matrix);
 bool checkGaussMatrix(int n, double** & matrix);
 void createInterface();
-void output2(int n, double **matrix);
 
 int main()
 {
@@ -216,15 +215,3 @@ void output(int n, double *matrix)
 	}
 }
 
-void output2(int n, double **matrix)
-{
-	system("cls");
-	cout << "Ответ:" << '\n';
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j <= n; j++)
-		{
-			cout << "a" << i + j << " = " << matrix[i][j] << '\n';
-		}
-	}
-}
